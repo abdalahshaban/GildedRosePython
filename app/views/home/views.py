@@ -1,4 +1,4 @@
-from flask import flash ,redirect,render_template,url_for
+from flask import redirect,render_template,url_for
 from .forms import CreateItem
 
 from ...models.item import Item
@@ -13,6 +13,7 @@ items =[]
 
 @home.route('/create',methods=['GET','POST'])
 def create():
+  print('in fun')
   """
   Handle request to /create route 
   Add an Item 
