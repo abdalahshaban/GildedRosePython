@@ -15,7 +15,7 @@ def create():
         # Add item to array
         createItem(item)
         # go to list view
-        return render_template(url_for('createItem.html'))
+        return redirect(url_for('home'))
 
     # load create item view
     return render_template('home/createItem.html', form=form, title="Create Item")

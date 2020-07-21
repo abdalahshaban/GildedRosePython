@@ -1,10 +1,10 @@
 from .models.item import Item
 
 items = [
-    Item(name='Aged Brie', sell_in=1, quality=1),
-    Item(name='Backstage passes to a TAFKAL80ETC concert', sell_in=2, quality=2),
-    Item(name='Sulfuras, Hand of Ragnaros', sell_in=3, quality=3),
-    Item(name='Conjured', sell_in=4, quality=4)
+    Item(name='Aged Brie', sell_in=10, quality=20),
+    Item(name='Backstage passes to a TAFKAL80ETC concert', sell_in=20, quality=30),
+    Item(name='Sulfuras, Hand of Ragnaros', sell_in=30, quality=40),
+    Item(name='Conjured', sell_in=33, quality=45)
 ]
 
 
@@ -13,10 +13,10 @@ def getItems():
 
 
 def createItem(item):
-    items.extend(item)
+    items.append(item)
 
 
-def updateItems():
+def updateItems1():
     for item in items:
         if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
             if item.quality > 0:
@@ -45,3 +45,33 @@ def updateItems():
             else:
                 if item.quality < 50:
                     item.quality = item.quality + 1
+
+
+def updateItems():
+    for item in items:   
+        if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
+            if item.quality > 0 and item.name != "Sulfuras, Hand of Ragnaros":
+                if item.name == "Conjured":
+                    if item.quality >=4 :
+                        item.sell_in = item.sell_in - 1
+                    else: item.quality=0
+                else:
+                    if item.quality >=2 :
+                        item.quality = item.quality-2
+                    else: item.quality=0 
+        else:
+            if item.quality < 50:
+                item.quality=item.quality+1
+                if item.name == "Backstage passes to a TAFKAL80ETC concert":
+                    if item.sell_in <= 5:
+                        if item.quality <=48:
+                            item.quality = item.quality+2 
+                        else: item.quality=50
+                    elif item.sell_in <= 10 and item.quality < 50:
+                        item.quality = item.quality+1
+        if item.name !="Sulfuras, Hand of Ragnaros":
+            item.sell_in = item.sell_in - 1
+
+
+            
+           
