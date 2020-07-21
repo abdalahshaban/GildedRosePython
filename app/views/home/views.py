@@ -1,17 +1,15 @@
 from flask import redirect,render_template,url_for
 from .forms import CreateItem
+from . import home
+from ...models.item import Item
 
-from ...models import Item
+# @home.route('/')
+# def home():
+#     return render_template('home/index.html',len = len(items),items=items)
 
-items =[]
-
-@create.route('/create',methods=['GET','POST'])
+@home.route('/create',methods=['GET','POST'])
 def create():
-  print('in fun')
-  """
-  Handle request to /create route 
-  Add an Item 
-  """
+
   form=CreateItem()
   if form.validate_on_submit():
     item=Item(name=form.name.data,sell_in=form.sell_in.data,quality=form.quality.data)
@@ -19,9 +17,9 @@ def create():
     items.extend(item)
 
     # go to list view 
-    return render_template('../templates/listItems.html')
-  
+    return render_template(url_for('createItem.html'))
+
   # load create item view
-  return render_template('../templates/createItem.html',form=form,title="CreateItem")
+  return render_template('home/createItem.html',form=form,title="CreateItem")
 
   

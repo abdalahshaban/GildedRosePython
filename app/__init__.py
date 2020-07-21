@@ -3,7 +3,8 @@ from flask import Flask
 from flask import redirect,render_template,url_for
 from flask_wtf.csrf import CSRFProtect, CSRFError
 from flask_bootstrap import Bootstrap
-
+from .models.item import Item
+from .service import getItems
 
 
 def create_app():
@@ -15,12 +16,10 @@ def create_app():
       ))
     bootstrap = Bootstrap(app)
 
-    from .models import item
-
+    from .models import item   
     @app.route('/')
     def home():
-        return render_template('home/index.html')
-        
+        return render_template('home/index.html',len = len(getItems()),items=getItems())
     from .views.home import home as home_blueprint
     app.register_blueprint(home_blueprint)
 
