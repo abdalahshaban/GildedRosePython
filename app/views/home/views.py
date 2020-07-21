@@ -1,17 +1,11 @@
 from flask import redirect,render_template,url_for
 from .forms import CreateItem
 
-from ...models.item import Item
-from ..home import home
+from ...models import Item
 
 items =[]
 
-# @home.route('/')
-# def home():
-#   return render_template('home/index.html')
-
-
-@home.route('/create',methods=['GET','POST'])
+@create.route('/create',methods=['GET','POST'])
 def create():
   print('in fun')
   """
@@ -25,9 +19,9 @@ def create():
     items.extend(item)
 
     # go to list view 
-    # return redirect(url_for('home.list'))
+    return render_template('../templates/listItems.html')
   
   # load create item view
-  return render_template('home/createItem.html',form=form,title="CreateItem")
+  return render_template('../templates/createItem.html',form=form,title="CreateItem")
 
   
